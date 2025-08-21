@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require('../models/user.model')
 const aiService = require('../services/ai.service')
 const messageModel = require('../models/message.model')
-
+const {CreateMemory,queryMemory} = require('../services/vector.service')
 function initSocketServer(httpServer) {
   const io = new Server(httpServer, {});
 
@@ -60,7 +60,7 @@ function initSocketServer(httpServer) {
         
         await messageModel.create({
         chat: messagePlayload.chat,
-        user: socket.user._id,  // ✅ actual ObjectId pass karo
+        user: socket.user._id,  //  actual ObjectId pass karo
         content: responce,
         role: "model"
         })
